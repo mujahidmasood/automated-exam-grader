@@ -1,0 +1,15 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{"exam_viewer_title" | translate}}</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="closePdfViewer()">Close</button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <iframe [src]="data" height="100%" width="100%"></iframe>
+</ion-content>

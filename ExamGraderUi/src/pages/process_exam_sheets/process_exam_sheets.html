@@ -1,0 +1,142 @@
+<ion-header>
+    <ion-navbar color="secondary" text-center>
+        <ion-row>
+            <ion-col>
+                <img left alt="logo" height="40px" src="assets/imgs/logo.png">
+            </ion-col>
+            <ion-col>
+                <ion-label left>{{'schedule_grading_title' | translate}}</ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-buttons end>
+            <button ion-button icon-only (click)="processExamSheets(processExamForm.value)">
+                <ion-icon name="cloud"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <form [formGroup]="processExamForm">
+
+        <ion-list>
+            <ion-list formControlName="language" radio-group (ionChange)="changeLanguage($event)">
+
+                <ion-row padding-right padding-left>
+                    <ion-col>
+                        <ion-label>{{"de" |translate}}</ion-label>
+                        <ion-radio selected value="de"></ion-radio>
+                    </ion-col>
+                    <ion-col>
+                        <ion-label>{{"en" | translate}}</ion-label>
+                        <ion-radio value="en"></ion-radio>
+                    </ion-col>
+                </ion-row>
+
+            </ion-list>
+
+            <ion-item margin-bottom no-lines>
+                <ion-label>{{'exam_to_process' | translate}}</ion-label>
+
+                <ion-select formControlName="inputExamSheetsDirectory">
+                    <ion-option [value]="unProcessedExam.course + getTranslatedValue(unProcessedExam.semester) + unProcessedExam.year" *ngFor="let unProcessedExam of unProcessedExams">
+                        {{ unProcessedExam.course + ' - ' +getTranslatedValue(unProcessedExam.semester) +' '+unProcessedExam.year}}
+                        <ion-input hidden formControlName="id" [value]="unProcessedExam.id"></ion-input>
+                    </ion-option>
+                </ion-select>
+            </ion-item>
+
+
+            <ion-item
+                    margin-bottom
+                    no-lines>
+                <ion-label floating>{{'processing_date' | translate}}</ion-label>
+                <ion-datetime displayFormat="DD MMMM YYYY" min="2016" max="2020-10-31"
+                              formControlName="processingDate"></ion-datetime>
+                <span>Please enter processing Time for exam</span>
+            </ion-item>
+
+            <!--<ion-item
+                    margin-bottom
+                    no-lines>
+                <ion-label floating>Processing Time</ion-label>
+                <ion-datetime displayFormat="HH:mm" min="2016" max="2020-10-31"
+                              formControlName="processingTime"></ion-datetime>
+                <span>Please enter processing time for exam</span>
+            </ion-item>-->
+
+            <!--<ion-item
+                    margin-bottom
+                    no-lines>
+                <ion-label floating>Processing Mode</ion-label>
+
+                <ion-select interface="popover"
+                            formControlName="processingMode">
+                    <ion-option [value]="serial">Serial</ion-option>
+                    <ion-option [value]="distributed">Distributed</ion-option>
+                </ion-select>
+
+                <span>Please enter processing mode for exam</span>
+            </ion-item>-->
+
+            <ion-item
+                    margin-bottom
+                    no-lines>
+                <ion-label floating>{{'grading_criteria' | translate}}</ion-label>
+
+                <ion-select interface="popover"
+                            formControlName="gradingMode">
+                    <ion-option value="full">{{'full' | translate}}</ion-option>
+                    <ion-option value="partial">{{'partial' | translate}}</ion-option>
+                </ion-select>
+
+                <span>Please enter Grading Criteria for exam</span>
+            </ion-item>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                     attr.aria-valuenow="{{progress.percentage}}"
+                     aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+                    {{progress.percentage}}%
+                </div>
+            </div>
+
+            <ion-item>
+                <ion-input type="file" (change)="selectFile($event)" multiple accept=".png, .jpg, .jpeg, .pdf"></ion-input>
+            </ion-item>
+
+            <ion-buttons>
+                <button ion-button round [disabled]="!selectedFiles"
+                        (click)="upload(processExamForm.value)">{{'upload' | translate}}
+                </button>
+
+                <button ion-button round [disabled]="!processExamForm.value.inputExamSheetsDirectory" *ngIf='showFile'
+                        (click)="showFiles(false, processExamForm.value)">{{'hide_files' | translate}}
+                </button>
+                <button ion-button round [disabled]="!processExamForm.value.inputExamSheetsDirectory" *ngIf='!showFile'
+                        (click)='showFiles(true, processExamForm.value)'>{{'show_files' | translate}}
+                </button>
+            </ion-buttons>
+
+
+            <ion-list *ngFor="let file of fileUploads | async" [hidden]="!showFile">
+                <ion-item>
+                    {{file}}
+                    <ion-buttons end>
+                        <button ion-button icon-only (click)="getUploadedImage(file, processExamForm.value)">
+                            <ion-icon name="eye"></ion-icon>
+                        </button>
+                        <button ion-button icon-only (click)="deleteStudentExamSheet(processExamForm.value, file)">
+                            <ion-icon name="trash"></ion-icon>
+                        </button>
+                    </ion-buttons>
+                </ion-item>
+                <img [src]="uploadedImage" *ngIf="uploadedImage">
+            </ion-list>
+        </ion-list>
+
+
+    </form>
+</ion-content>

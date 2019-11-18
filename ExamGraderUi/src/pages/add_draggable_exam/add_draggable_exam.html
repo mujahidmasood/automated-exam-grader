@@ -1,0 +1,181 @@
+<!--
+<ion-header #content>
+    <ion-navbar color="secondary" text-center>
+        <ion-title>{{'add_draggable_title' | translate}}</ion-title>
+
+        <ion-buttons start>
+            <button ion-button icon-only (click)="saveExamData()">
+                <ion-icon name="eye"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-split-pane>
+        <ion-menu [content]="content">
+            <ion-header>
+                <ion-toolbar>
+                    <ion-title>Designer</ion-title>
+                </ion-toolbar>
+            </ion-header>
+
+            <ion-content>
+                <ion-grid [dragula]="COPYABLE" id="left">
+
+                    <ion-card>
+                        <ion-card-content>
+                            <ion-row>
+                                <ion-label>Matriculation Number</ion-label>
+                                <ion-input
+                                        placeholder="Enter value here"
+                                        [(ngModel)]="examHeader.matriculationNo"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">Course</ion-label>
+                                <ion-input
+                                        placeholder="Enter value here"
+                                        [(ngModel)]="examHeader.course"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">Semester</ion-label>
+                                <ion-input
+                                        placeholder="Enter semester"
+                                        [(ngModel)]="examHeader.semester"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">Year</ion-label>
+                                <ion-input
+                                        placeholder="Enter year"
+                                        [(ngModel)]="examHeader.year"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">Instructor</ion-label>
+                                <ion-input
+                                        placeholder="Enter Instructor"
+                                        [(ngModel)]="examHeader.instructor"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">Full Name</ion-label>
+                                <ion-input
+                                        placeholder="Enter year"
+                                        [(ngModel)]="examHeader.fullName"
+                                ></ion-input>
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+
+                    <ion-card>
+                        <ion-card-content>
+                            <ion-row>
+                                <ion-label position="floating">Topic</ion-label>
+                                <ion-input
+                                        placeholder="Enter topic name here"
+                                        [(ngModel)]="section.topic"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">Topic Number</ion-label>
+                                <ion-input
+                                        placeholder="Enter topic name here"
+                                        [(ngModel)]="section.topicNumber"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">Topic Points</ion-label>
+                                <ion-input
+                                        placeholder="Enter topic name here"
+                                        [(ngModel)]="section.topicPoints"
+                                ></ion-input>
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+
+                    <ion-card>
+                        <ion-card-content>
+                            <ion-row>
+                                <ion-label position="floating">SubTopic</ion-label>
+                                <ion-input
+                                        placeholder="Enter SubTopic"
+                                        [(ngModel)]="subSection.subTopic"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">SubTopic Number</ion-label>
+                                <ion-input
+                                        placeholder="Enter SubTopic Number"
+                                        [(ngModel)]="subSection.subTopicNumber"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">SubTopic Points</ion-label>
+                                <ion-input
+                                        placeholder="Enter SubTopic Points"
+                                        [(ngModel)]="subSection.subTopicPoints"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">SubTopic Description</ion-label>
+                                <ion-input
+                                        placeholder="Enter SubTopic Description"
+                                        [(ngModel)]="subSection.subTopicDescription"
+                                ></ion-input>
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+
+
+                    <ion-item-divider></ion-item-divider>
+
+                    <ion-card>
+                        <ion-card-content>
+                            <ion-row>
+                                <ion-label position="floating">Question Number</ion-label>
+                                <ion-input
+                                        placeholder="Enter Question Number"
+                                        [(ngModel)]="question.questionNumber"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">Question Description
+                                </ion-label>
+                                <ion-input
+                                        placeholder="Enter Question Description"
+                                        [(ngModel)]="question.description"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">Question Points</ion-label>
+                                <ion-input
+                                        placeholder="Enter Question Points"
+                                        [(ngModel)]="question.points"
+                                ></ion-input>
+                            </ion-row>
+                            <ion-row>
+                                <ion-label position="floating">Possible Answers</ion-label>
+                                <ion-input
+                                        placeholder="Enter Possible Answers"
+                                        [(ngModel)]="question.possibleAnswers"
+                                ></ion-input>
+                            </ion-row>
+                        </ion-card-content>
+                    </ion-card>
+
+                    <ion-item-divider></ion-item-divider>
+
+                </ion-grid>
+            </ion-content>
+        </ion-menu>
+
+        <ion-grid #content [dragula]="COPYABLE" id="right" main col-8>
+            <p center>Drag and Drop Here</p>
+        </ion-grid>
+    </ion-split-pane>
+
+</ion-content>-->

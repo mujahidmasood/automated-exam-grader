@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-row>
+            <ion-col>
+                <img left alt="logo" height="40px" src="assets/imgs/logo.png">
+            </ion-col>
+            <ion-col>
+                <ion-label left>{{'grading_details_title' | translate}}</ion-label>
+            </ion-col>
+        </ion-row>
+
+        <ion-buttons end>
+            <button (click)="exportExcel()" ion-button icon-only>
+                <ion-icon name="document"></ion-icon>
+            </button>
+            <button (click)="updateGrades()" ion-button icon-only>
+                <ion-icon name="cloud"></ion-icon>
+            </button>
+            <button (click)="helpMenu()" ion-button icon-only>
+                <ion-icon name="help"></ion-icon>
+            </button>
+
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="form">
+    <ion-grid>
+        <ion-list formControlName="language" radio-group (ionChange)="changeLanguage($event)">
+
+            <ion-row padding-right padding-left>
+                <ion-col>
+                    <ion-label>{{"de" |translate}}</ion-label>
+                    <ion-radio selected value="de"></ion-radio>
+                </ion-col>
+                <ion-col>
+                    <ion-label>{{"en" | translate}}</ion-label>
+                    <ion-radio value="en"></ion-radio>
+                </ion-col>
+            </ion-row>
+
+        </ion-list>
+        <ion-item *ngIf="!detailsShown">
+            <ng2-smart-table
+                    [settings]="studentGradeDetailsHeader"
+                    [source]="studentGradeDetails"
+                    (custom)="gradeDetailsCustomAction($event)"
+                    (deleteConfirm)="deleteGrades($event)"
+            ></ng2-smart-table>
+        </ion-item>
+
+        <ion-item *ngIf="detailsShown">
+            <ng2-smart-table
+
+                    [settings]="pointDetailsHeader"
+                    [source]="pointDetails"
+                    (custom)="pointDetailsCustomAction($event)"
+                    (deleteConfirm)="deleteGrades($event)"
+            ></ng2-smart-table>
+            <img [src]="croppedImage" *ngIf="croppedImage" alt="{{'image_not_found' | translate}}">
+        </ion-item>
+
+
+    </ion-grid>
+    </form>
+</ion-content>

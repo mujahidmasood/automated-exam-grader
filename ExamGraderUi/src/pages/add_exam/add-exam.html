@@ -1,0 +1,311 @@
+<ion-header>
+    <ion-navbar color="secondary" text-center>
+        <ion-row>
+            <ion-col>
+                <img left alt="logo" height="40px" src="assets/imgs/logo.png">
+            </ion-col>
+            <ion-col>
+                <ion-label left>{{'add_title' | translate}}</ion-label>
+            </ion-col>
+        </ion-row>
+
+        <ion-buttons end>
+            <button ion-button icon-only (click)="viewExamPdf(form.value)">
+                <ion-icon name="eye"></ion-icon>
+            </button>
+            <button ion-button icon-only (click)="saveExamData(form.value)">
+                <ion-icon name="cloud"></ion-icon>
+            </button>
+            <button (click)="helpMenu()" ion-button icon-only>
+                <ion-icon name="help"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-fab right bottom>
+        <button ion-fab>
+            <ion-icon name="add"></ion-icon>
+        </button>
+        <ion-fab-list side="left">
+            <ion-row (click)="addTopicsSection()">
+                <ion-col>
+                    <ion-chip>
+                        <ion-icon name="settings"></ion-icon>
+                        <ion-label>{{'add_topics_section' | translate}}</ion-label>
+                    </ion-chip>
+                </ion-col>
+            </ion-row>
+            <ion-row (click)="addSubTopicsSection()">
+                <ion-col>
+                    <ion-chip>
+                        <ion-icon name="settings"></ion-icon>
+                        <ion-label>{{'add_subtopics_section' | translate}}</ion-label>
+                    </ion-chip>
+                </ion-col>
+            </ion-row>
+            <ion-row (click)="addQuestionsSection()">
+                <ion-col>
+                    <ion-chip>
+                        <ion-icon name="settings"></ion-icon>
+                        <ion-label>{{'add_questions_section' | translate}}</ion-label>
+                    </ion-chip>
+                </ion-col>
+            </ion-row>
+        </ion-fab-list>
+    </ion-fab>
+    <form [formGroup]="form">
+
+        <ion-list margin-bottom>
+
+            <ion-list formControlName="language" radio-group (ionChange)="changeLanguage($event)">
+
+                <ion-row padding-right padding-left>
+                    <ion-col>
+                        <ion-label>{{"de" |translate}}</ion-label>
+                        <ion-radio selected value="de"></ion-radio>
+                    </ion-col>
+                    <ion-col>
+                        <ion-label>{{"en" | translate}}</ion-label>
+                        <ion-radio value="en"></ion-radio>
+                    </ion-col>
+                </ion-row>
+
+            </ion-list>
+            <div>
+                <ion-item-divider color="light">{{"header_section" | translate}}</ion-item-divider>
+                <ion-item margin-bottom>
+                    <ion-label floating>{{'fullName' | translate}}</ion-label>
+
+                    <ion-input
+                            type="text"
+                            maxlength="50"
+                            formControlName="fullName"></ion-input>
+                </ion-item>
+                <ion-item margin-bottom>
+                    <ion-label floating>{{"std_coordinates" | translate}}</ion-label>
+
+                    <ion-input
+                            type="text"
+                            maxlength="40"
+                            formControlName="matriculationNo"></ion-input>
+                </ion-item>
+                <ion-item margin-bottom>
+                    <ion-label floating>{{'course_name' | translate}}*</ion-label>
+
+                    <ion-input
+                            type="text"
+                            maxlength="100"
+                            formControlName="course"></ion-input>
+                </ion-item>
+
+                <ion-item margin-bottom>
+                    <ion-label floating>{{'semester' | translate}}*</ion-label>
+
+                    <ion-select formControlName="semester" okText="OK" cancelText="Cancel">
+                        <ion-option value="sose">{{"sose" | translate}}</ion-option>
+                        <ion-option value="wose">{{"wose" | translate}}</ion-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item margin-bottom>
+                    <ion-label floating>{{'year' | translate}}*</ion-label>
+
+                    <ion-input
+                            type="text"
+                            maxlength="4"
+                            formControlName="year"></ion-input>
+                </ion-item>
+                <ion-item margin-bottom>
+                    <ion-label floating>{{'instructor' | translate}}</ion-label>
+
+                    <ion-input
+                            type="text"
+                            maxlength="100"
+                            formControlName="instructor"></ion-input>
+                </ion-item>
+            </div>
+
+            <div formArrayName="topics" margin-bottom>
+                <section
+                        [formGroupName]="i"
+                        *ngFor="let topic of form.controls.topics.controls; let i = index;">
+
+                    <ion-item-group>
+
+                        <ion-item-divider color="light">{{"topics_section" | translate}}</ion-item-divider>
+                        <ion-item>
+                            <ion-label floating>{{"topic" | translate}}</ion-label>
+                            <ion-input
+                                    type="text"
+                                    maxlength="50"
+                                    spellcheck="true"
+                                    formControlName="topicName"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label floating>{{"topicNumber" | translate}}</ion-label>
+                            <ion-input
+                                    type="text"
+                                    maxlength="50"
+                                    formControlName="topicNumber"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label floating>{{"topicPoints" | translate}}</ion-label>
+                            <ion-input
+                                    type="text"
+                                    maxlength="50"
+                                    formControlName="topicPoints"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label floating>{{"topicDescription" | translate}}</ion-label>
+                            <ion-textarea
+                                    type="text"
+                                    spellcheck="true"
+                                    border-radius="10px"
+                                    autoresize="100"
+                                    formControlName="topicDescription"></ion-textarea>
+                        </ion-item>
+
+
+                        <span
+                                float-right
+                                ion-button
+                                icon-left
+                                clear
+                                (click)="removeTopicsSection(i)">
+                     <ion-icon name="trash"></ion-icon>
+                     {{"delete_question" | translate}}
+                  </span>
+
+                    </ion-item-group>
+                </section>
+            </div>
+            <div formArrayName="subTopics" margin-bottom>
+                <section
+                        [formGroupName]="i"
+                        *ngFor="let subTopic of form.controls.subTopics.controls; let i = index;">
+                    <ion-item-group>
+
+                        <ion-item-divider color="light">{{"subTopics_section" | translate}}</ion-item-divider>
+
+                        <ion-item>
+                            <ion-label floating>{{"subTopic" | translate}}</ion-label>
+                            <ion-input
+                                    type="text"
+                                    spellcheck="true"
+                                    maxlength="50"
+                                    formControlName="subTopicName"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label floating>{{"subTopicNumber" | translate}}</ion-label>
+                            <ion-input
+                                    type="text"
+                                    maxlength="50"
+                                    formControlName="subTopicNumber"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label floating>{{"subTopicPoints" | translate}}</ion-label>
+                            <ion-input
+                                    type="text"
+                                    maxlength="50"
+                                    formControlName="subTopicPoints"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label floating>{{"subTopicDescription" | translate}}</ion-label>
+                            <ion-textarea
+                                    type="text"
+                                    spellcheck="true"
+                                    autoresize="100"
+                                    formControlName="subTopicDescription"></ion-textarea>
+                        </ion-item>
+
+                        <span
+                                float-right
+                                ion-button
+                                icon-left
+                                clear
+                                (click)="removeSubTopicsSection(i)">
+                     <ion-icon name="trash"></ion-icon>
+                     {{"delete_question" | translate}}
+                  </span>
+                    </ion-item-group>
+                </section>
+            </div>
+            <div formArrayName="questions" margin-bottom>
+                <section
+                        [formGroupName]="i"
+                        *ngFor="let question of form.controls.questions.controls; let i = index;">
+                    <ion-item-group>
+
+                        <ion-item-divider color="light">{{"questions_section" | translate}}</ion-item-divider>
+
+                        <ion-item>
+                            <ion-label floating>{{"question_no" | translate}}*</ion-label>
+                            <ion-input
+                                    type="text"
+                                    maxlength="50"
+                                    formControlName="questionNumber"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label floating>{{"questionDescription" | translate}}*</ion-label>
+                            <ion-textarea
+                                    type="text"
+                                    spellcheck="true"
+                                    autoresize="100"
+                                    formControlName="questionDescription"></ion-textarea>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label floating>{{"keywords" | translate}}*</ion-label>
+                            <ion-textarea
+                                    type="text"
+                                    spellcheck="true"
+                                    autoresize="100"
+                                    formControlName="possibleAnswers"></ion-textarea>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label floating>{{"points" | translate}}*</ion-label>
+                            <ion-input
+                                    type="text"
+                                    maxlength="50"
+                                    formControlName="points"></ion-input>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label floating>{{"answer_coordinates" | translate}}</ion-label>
+                            <ion-input
+                                    type="text"
+                                    maxlength="50"
+                                    formControlName="answerCoordinates"></ion-input>
+                        </ion-item>
+
+
+                        <span
+                                float-right
+                                ion-button
+                                icon-left
+                                clear
+                                (click)="removeQuestionsSection(i)">
+                     <ion-icon name="trash"></ion-icon>
+                     {{"delete_question" | translate}}
+                  </span>
+                    </ion-item-group>
+                </section>
+            </div>
+
+
+        </ion-list>
+    </form>
+
+</ion-content>

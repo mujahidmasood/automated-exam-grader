@@ -1,0 +1,73 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-row>
+            <ion-col>
+                <img left alt="logo" height="40px" src="assets/imgs/logo.png">
+            </ion-col>
+            <ion-col>
+                <ion-label left>{{'grading_title' | translate}}</ion-label>
+            </ion-col>
+        </ion-row>
+
+        <ion-buttons end *ngIf="searchDivHidden">
+            <button (click)="showSearchDiv()" ion-button icon-only>
+                <ion-icon name="search"></ion-icon>
+            </button>
+            <button (click)="helpMenu()" ion-button icon-only>
+                <ion-icon name="help"></ion-icon>
+            </button>
+            <button (click)="sort()" ion-button icon-only>
+                <ion-icon name="reorder"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-buttons end *ngIf="!searchDivHidden">
+        <ion-searchbar [(ngModel)]="terms" *ngIf="!searchDivHidden"></ion-searchbar>
+        <button (click)="hideSearchDiv()" ion-button icon-only>
+            <ion-icon name="close"></ion-icon>
+        </button>
+    </ion-buttons>
+    <form [formGroup]="form">
+        <ion-list>
+
+            <ion-list formControlName="language" radio-group (ionChange)="changeLanguage($event)">
+
+                <ion-row padding-right padding-left>
+                    <ion-col>
+                        <ion-label>{{"de" |translate}}</ion-label>
+                        <ion-radio selected value="de"></ion-radio>
+                    </ion-col>
+                    <ion-col>
+                        <ion-label>{{"en" | translate}}</ion-label>
+                        <ion-radio value="en"></ion-radio>
+                    </ion-col>
+                </ion-row>
+
+            </ion-list>
+
+            <ion-item-sliding *ngFor="let gradedExam of gradedExams |
+        search : terms |
+        sort: {property: column, order: order} ; let i=index;">
+                <ion-item>
+                    {{ gradedExam.exam.course + ' - ' +getTranslatedValue(gradedExam.exam.semester) +''+gradedExam.exam.year}}
+
+                    <ion-buttons end>
+                        <button (click)="viewGrading(i)" ion-button icon-only danger>
+                            <ion-icon name="eye"></ion-icon>
+                        </button>
+                        <button (click)="deleteGrading(i)" ion-button icon-only danger>
+                            <ion-icon name="trash"></ion-icon>
+                        </button>
+                    </ion-buttons>
+                </ion-item>
+
+            </ion-item-sliding>
+        </ion-list>
+    </form>
+
+</ion-content>

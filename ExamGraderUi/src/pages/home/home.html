@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-row>
+            <ion-col>
+                <img left alt="logo" height="40px" src="assets/imgs/logo.png">
+            </ion-col>
+            <ion-col>
+                <ion-label left>{{'home_title' | translate}}</ion-label>
+            </ion-col>
+        </ion-row>
+
+        <ion-buttons end *ngIf="searchDivHidden">
+            <button (click)="searchUnprocessedExams()" ion-button icon-only>
+                <ion-icon name="search"></ion-icon>
+            </button>
+            <button (click)="addNewExam()" ion-button icon-only>
+                <ion-icon name="add"></ion-icon>
+            </button>
+            <button (click)="helpMenu()" ion-button icon-only>
+                <ion-icon name="help"></ion-icon>
+            </button>
+            <button (click)="sort()" ion-button icon-only>
+                <ion-icon name="reorder"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-buttons end *ngIf="!searchDivHidden">
+        <ion-searchbar [(ngModel)]="terms" *ngIf="!searchDivHidden"></ion-searchbar>
+        <button (click)="hideSearchDiv()" ion-button icon-only>
+            <ion-icon name="close"></ion-icon>
+        </button>
+    </ion-buttons>
+    <p text-center *ngIf="unProcessedExams.length == 0"> All exams processed</p>
+
+    <ion-list>
+        <ion-item-sliding *ngFor="let unProcessedExam of unProcessedExams |
+        search : terms |
+        sort: {property: column, order: order} ; let i=index;">
+            <ion-item>
+                {{ unProcessedExam.course + ' - ' +getTranslatedValue(unProcessedExam.semester) +' '+unProcessedExam.year}}
+
+                <ion-buttons end>
+                    <button (click)="editDetails(i)" ion-button icon-only danger>
+                        <ion-icon name="create"></ion-icon>
+                    </button>
+                    <button (click)="deleteExam(i)" ion-button icon-only danger>
+                        <ion-icon name="trash"></ion-icon>
+                    </button>
+                </ion-buttons>
+            </ion-item>
+
+        </ion-item-sliding>
+    </ion-list>
+
+</ion-content>

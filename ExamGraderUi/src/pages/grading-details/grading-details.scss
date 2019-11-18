@@ -1,0 +1,67 @@
+page-grading-details {
+  ng2-smart-table table {
+    border-style: inset;
+    border-color: initial;
+    border-image: initial;
+    border-width: 2px;
+
+    display: table;
+    border-spacing: 2px;
+    border-color: grey;
+  }
+
+  ng2-smart-table table > tbody > tr > td {
+    box-sizing: border-box;
+    border: 1px solid grey;
+  }
+
+  ng2-smart-table thead > tr > th {
+    border: 1px solid grey;
+  }
+
+  ng2-smart-table {
+    font-size: 16px;
+  }
+
+  [_nghost-c0] table tr th {
+    font-size: .875em;
+    margin: 0;
+    padding: .5em 1em;
+    font-size: 15px;
+  }
+
+  [_nghost-c0] * {
+    box-sizing: border-box;
+    font-size: 15px;
+  }
+
+  [_nghost-c0] a {
+    color: #1e6bb8;
+    text-decoration: none;
+    padding: 5px;
+  }
+
+  :host /deep/ ng2-smart-table {
+    font-size: 16px;
+  }
+
+  $table-font-color: #606c71;
+  $table-border-color: #e9ebec;
+
+  :host{
+    /deep/ {
+
+      table{
+        color: $table-font-color;
+        tr {
+          td,th{
+            border: 1px solid $table-border-color;
+          }
+        }
+      }
+    }
+  }
+
+
+
+}

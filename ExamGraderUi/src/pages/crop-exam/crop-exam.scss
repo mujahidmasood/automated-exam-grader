@@ -1,0 +1,13 @@
+page-crop-exam {
+  ion-app.md [padding] {
+    padding: 54px;
+  }
+
+  .bounding-box {
+    background-size: contain;
+    position: absolute;
+    background: no-repeat center;
+    height: 100%;
+    width: 100%;
+  }
+}

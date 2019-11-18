@@ -1,0 +1,80 @@
+{
+  "name": "AutomatedExamGrader",
+  "version": "1.0.0",
+  "author": "Mujahid Masood",
+  "homepage": "http://examautograder.de/",
+  "private": true,
+  "scripts": {
+    "start": "ionic-app-scripts serve --proxy-config proxy.conf.json",
+    "clean": "ionic-app-scripts clean",
+    "build": "ionic-app-scripts build",
+    "lint": "ionic-app-scripts lint"
+  },
+  "dependencies": {
+    "@angular/animations": "^7.0.1",
+    "@angular/cli": "^7.0.3",
+    "@angular/common": "^7.0.1",
+    "@angular/compiler": "7.0.1",
+    "@angular/compiler-cli": "^7.0.1",
+    "@angular/core": "^7.0.1",
+    "@angular/forms": "^7.0.1",
+    "@angular/http": "^7.0.1",
+    "@angular/platform-browser": "^7.0.1",
+    "@angular/platform-browser-dynamic": "^7.0.1",
+    "@ionic-native/file": "^5.8.0",
+    "@ionic-native/sqlite": "^5.8.0",
+    "@ionic/storage": "2.1.3",
+    "@ngx-translate/core": "^11.0.0",
+    "@ngx-translate/http-loader": "^4.0.0",
+    "@types/datatables.net": "^1.10.17",
+    "@types/html2canvas": "0.0.35",
+    "@types/jquery": "^3.3.30",
+    "@types/jspdf": "^1.2.2",
+    "angular-cropperjs": "^0.1.5",
+    "angular-datatables": "^8.0.0",
+    "cordova-android": "7.0.0",
+    "cordova-browser": "5.0.4",
+    "datatables.net": "^1.10.19",
+    "datatables.net-dt": "^1.10.19",
+    "dragula": "^3.7.2",
+    "file-saver": "^2.0.0",
+    "ionic": "^4.8.0",
+    "ionic-angular": "3.9.2",
+    "ionicons": "3.0.0",
+    "jquery": "^3.4.1",
+    "ng-image-viewer": "^0.1.7",
+    "ng2-completer": "^2.0.8",
+    "ng2-dragula": "^2.1.1",
+    "ng2-file-upload": "^1.3.0",
+    "ng2-pdf-viewer": "^5.2.3",
+    "ng2-smart-table": "^1.5.0",
+    "pdfjs-dist": "^2.0.943",
+    "pdfmake": "^0.1.57",
+    "rxjs": "^6.3.3",
+    "rxjs-compat": "^6.2.0",
+    "sw-toolbox": "3.6.0",
+    "xlsx": "^0.14.1",
+    "zone.js": "0.8.26"
+  },
+  "devDependencies": {
+    "@ionic/app-scripts": "^3.2.4",
+    "typescript": "^3.1.3",
+    "cordova-plugin-splashscreen": "5.0.2"
+  },
+  "description": "Master thesis Exam Auto Grader Implementation",
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-file": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-splashscreen": {}
+    },
+    "platforms": [
+      "browser",
+      "android"
+    ]
+  }
+}
