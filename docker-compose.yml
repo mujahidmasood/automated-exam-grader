@@ -1,0 +1,64 @@
+version: '3.4'
+
+services:
+
+  mongo:
+    image: mongo:latest
+    container_name: exam-autograder-db
+    volumes:
+      - $PWD/data/exam-autograder-data:/data/db
+      - $PWD/data/exam-autograder-data-bkp:/data/bkp
+      - $PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/
+    restart: always
+    ports:
+      - 27017:27017
+    command: mongod
+
+  springboot:
+    build:
+      context: ExamAutoGraderService/
+      dockerfile: Dockerfile
+    container_name: exam-autograder-service
+    restart: always
+    depends_on:
+      - mongo
+    volumes:
+      - $PWD/uploads/:/usr/src/app
+    ports:
+      - 9090:9090
+      - 8081:8081
+
+  machinelearning:
+    build:
+      context: ExamAutoGraderProcessor/
+      dockerfile: Dockerfile
+    container_name: exam-autograder-processor
+    image: exam-autograder-processor
+    restart: always
+    depends_on:
+      - springboot
+    volumes:
+      - $PWD/uploads/:/usr/src/app
+    ports:
+    - 5000:5000
+
+  web:
+    build:
+      context: ExamGraderUi/
+      dockerfile: Dockerfile
+    image: exam-autograder-ui
+    container_name: web
+    restart: always
+    volumes:
+      - $PWD/uploads/:/usr/src/app
+    ports:
+    - 35728:35728
+    - 8100:8100
+
+volumes:
+     static-content:
+
+networks:
+  default:
+    external:
+      name: exam-autograder-network
