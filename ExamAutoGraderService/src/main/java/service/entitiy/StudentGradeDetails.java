@@ -1,4 +1,4 @@
-package de.tu.darmstadt.entitiy;
+package service.entitiy;
 
 import java.util.List;
 

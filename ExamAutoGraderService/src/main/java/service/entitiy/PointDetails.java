@@ -1,4 +1,4 @@
-package de.tu.darmstadt.entitiy;
+package service.entitiy;
 
 /**
  * Data structure for saving points related information in database.

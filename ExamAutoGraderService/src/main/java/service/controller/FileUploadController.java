@@ -1,8 +1,8 @@
-package de.tu.darmstadt.controller;
+package service.controller;
 
-import de.tu.darmstadt.entitiy.FileUploadEntity;
-import de.tu.darmstadt.services.StorageService;
-import de.tu.darmstadt.util.ApplicationConstants;
+import service.entitiy.FileUploadEntity;
+import service.services.StorageService;
+import service.util.ApplicationConstants;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;

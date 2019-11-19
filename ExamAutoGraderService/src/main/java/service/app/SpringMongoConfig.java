@@ -1,4 +1,4 @@
-package de.tu.darmstadt.app;
+package service.app;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;

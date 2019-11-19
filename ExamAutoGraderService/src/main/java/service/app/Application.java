@@ -1,12 +1,12 @@
-package de.tu.darmstadt.app;
+package service.app;
 
 
-import de.tu.darmstadt.controller.ExamController;
-import de.tu.darmstadt.controller.FileUploadController;
-import de.tu.darmstadt.controller.StudentGradeController;
-import de.tu.darmstadt.repositories.ExamGradeRepository;
-import de.tu.darmstadt.repositories.ExamRepository;
-import de.tu.darmstadt.services.StorageService;
+import service.controller.ExamController;
+import service.controller.FileUploadController;
+import service.controller.StudentGradeController;
+import service.repositories.ExamGradeRepository;
+import service.repositories.ExamRepository;
+import service.services.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

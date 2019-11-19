@@ -1,4 +1,4 @@
-package de.tu.darmstadt.entitiy;
+package service.entitiy;
 
 /**
  * Helper class for file upload

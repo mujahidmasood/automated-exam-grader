@@ -1,4 +1,4 @@
-package de.tu.darmstadt.util;
+package service.util;
 
 /**
  * Contains the constants used across the application

@@ -1,8 +1,8 @@
-package de.tu.darmstadt.services;
+package service.services;
 
-import de.tu.darmstadt.entitiy.Exam;
-import de.tu.darmstadt.repositories.ExamRepository;
-import de.tu.darmstadt.util.ApplicationConstants;
+import service.entitiy.Exam;
+import service.repositories.ExamRepository;
+import service.util.ApplicationConstants;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;

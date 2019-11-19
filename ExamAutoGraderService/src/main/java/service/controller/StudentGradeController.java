@@ -1,9 +1,7 @@
-package de.tu.darmstadt.controller;
+package service.controller;
 
-import de.tu.darmstadt.entitiy.Exam;
-import de.tu.darmstadt.entitiy.ExamGradeDetails;
-import de.tu.darmstadt.entitiy.StudentGradeDetails;
-import de.tu.darmstadt.repositories.ExamGradeRepository;
+import service.entitiy.ExamGradeDetails;
+import service.repositories.ExamGradeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

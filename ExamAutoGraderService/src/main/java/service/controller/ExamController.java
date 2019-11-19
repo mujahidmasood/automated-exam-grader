@@ -1,10 +1,10 @@
-package de.tu.darmstadt.controller;
+package service.controller;
 
-import de.tu.darmstadt.entitiy.*;
-import de.tu.darmstadt.repositories.ExamGradeRepository;
-import de.tu.darmstadt.repositories.ExamRepository;
-import de.tu.darmstadt.services.StorageService;
-import de.tu.darmstadt.util.ApplicationConstants;
+import service.entitiy.*;
+import service.repositories.ExamGradeRepository;
+import service.repositories.ExamRepository;
+import service.services.StorageService;
+import service.util.ApplicationConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;

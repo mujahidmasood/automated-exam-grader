@@ -1,6 +1,6 @@
-package de.tu.darmstadt.repositories;
+package service.repositories;
 
-import de.tu.darmstadt.entitiy.ExamGradeDetails;
+import service.entitiy.ExamGradeDetails;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

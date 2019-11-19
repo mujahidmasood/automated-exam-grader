@@ -1,4 +1,4 @@
-package de.tu.darmstadt.entitiy;
+package service.entitiy;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
