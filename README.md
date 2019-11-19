@@ -4,4 +4,4 @@ Ionic project with spring boot and flask service to recognise handwritten text f
 
 To run 
 
-sh run.sh
+sh setup.sh #run docker compose file and docker containers are created
