@@ -34,7 +34,7 @@
     "angular-datatables": "^8.0.0",
     "cordova-android": "7.0.0",
     "cordova-browser": "5.0.4",
-    "datatables.net": "^1.10.19",
+    "datatables.net": "^1.11.3",
     "datatables.net-dt": "^1.10.19",
     "dragula": "^3.7.2",
     "file-saver": "^2.0.0",
