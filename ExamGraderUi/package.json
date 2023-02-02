@@ -31,7 +31,7 @@
     "@types/jquery": "^3.3.30",
     "@types/jspdf": "^1.2.2",
     "angular-cropperjs": "^0.1.5",
-    "angular-datatables": "^8.0.0",
+    "angular-datatables": "^15.0.0",
     "cordova-android": "7.0.0",
     "cordova-browser": "5.0.4",
     "datatables.net": "^1.11.3",
