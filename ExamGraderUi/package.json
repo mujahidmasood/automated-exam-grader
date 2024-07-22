@@ -59,7 +59,7 @@
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.4",
     "typescript": "^3.1.3",
-    "cordova-plugin-splashscreen": "5.0.2"
+    "cordova-plugin-splashscreen": "5.0.4"
   },
   "description": "Master thesis Exam Auto Grader Implementation",
   "cordova": {
