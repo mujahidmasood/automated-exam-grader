@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -279,7 +279,7 @@ public class StorageService {
     private Map<String, BufferedImage> processPdf(String uploadLocation, File examSheet) {
 
         Map<String, BufferedImage> images = new HashMap<>();
-        try (PDDocument document = PDDocument.load(examSheet)) {
+        try (PDDocument document = org.apache.pdfbox.Loader.loadPDF(examSheet)) {
 
             PDFRenderer renderer = new PDFRenderer(document);
             for (int pageNum = 0; pageNum < document.getNumberOfPages(); pageNum++) {

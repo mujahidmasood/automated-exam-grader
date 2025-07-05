@@ -14,8 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.thymeleaf.util.DateUtils;
-import org.thymeleaf.util.StringUtils;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -113,8 +113,8 @@ public class ExamController {
      */
     @Scheduled(fixedRate = 1 * 60000)
     public void processExamSheets() {
-        Date date = new Date();
-        String processingDate = DateUtils.format(date, ApplicationConstants.DATE_FORMAT, Locale.getDefault());
+        LocalDate date = LocalDate.now();
+        String processingDate = date.format(DateTimeFormatter.ofPattern(ApplicationConstants.DATE_FORMAT));
         List<Exam> examsToProcess = examRepository.findAllByProcessedAndProcessingDate("false", processingDate);
         if(examsToProcess != null && !examsToProcess.isEmpty()) {
             examsToProcess.forEach(exam -> {
@@ -123,7 +123,7 @@ public class ExamController {
                     String scannedSheetDirectory = homeDirectory + "/" + exam.getInputExamSheetsDirectory().replace(" ", "");
                     System.out.println("exam inside processExamSheets() " + exam);
                     System.out.println("input exam directory " + scannedSheetDirectory);
-                    if (!StringUtils.isEmpty(scannedSheetDirectory)) {
+                    if (scannedSheetDirectory != null && !scannedSheetDirectory.trim().isEmpty()) {
                         List<String> uploadedSheets = storageService.loadUploadedExams(scannedSheetDirectory);
                         ExamGradeDetails examGradeDetails = new ExamGradeDetails();
                         List<StudentGradeDetails> studentGradeDetails = new ArrayList<>();
