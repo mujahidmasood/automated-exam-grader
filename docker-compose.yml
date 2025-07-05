@@ -1,64 +1,96 @@
-version: '3.4'
+version: '3.8'
 
 services:
 
   mongo:
-    image: mongo:latest
+    image: mongo:7.0
     container_name: exam-autograder-db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password123
+      - MONGO_INITDB_DATABASE=exam_grader
     volumes:
-      - $PWD/data/exam-autograder-data:/data/db
-      - $PWD/data/exam-autograder-data-bkp:/data/bkp
-      - $PWD/mongo-entrypoint/:/docker-entrypoint-initdb.d/
-    restart: always
+      - mongo_data:/data/db
+      - ./mongo-entrypoint/:/docker-entrypoint-initdb.d/
+    restart: unless-stopped
     ports:
-      - 27017:27017
-    command: mongod
+      - "27017:27017"
+    networks:
+      - exam-autograder-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
 
   springboot:
     build:
-      context: ExamAutoGraderService/
+      context: ./ExamAutoGraderService/
       dockerfile: Dockerfile
     container_name: exam-autograder-service
-    restart: always
+    restart: unless-stopped
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATA_MONGODB_URI=mongodb://admin:password123@mongo:27017/exam_grader?authSource=admin
+      - ML_SERVICE_URL=http://machinelearning:5000
     volumes:
-      - $PWD/uploads/:/usr/src/app
+      - ./uploads:/app/uploads
     ports:
-      - 9090:9090
-      - 8081:8081
+      - "9090:9090"
+    networks:
+      - exam-autograder-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9090/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   machinelearning:
     build:
-      context: ExamAutoGraderProcessor/
+      context: ./ExamAutoGraderProcessor/
       dockerfile: Dockerfile
     container_name: exam-autograder-processor
-    image: exam-autograder-processor
-    restart: always
-    depends_on:
-      - springboot
+    restart: unless-stopped
+    environment:
+      - FLASK_ENV=production
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/src/gcloud.json
     volumes:
-      - $PWD/uploads/:/usr/src/app
+      - ./uploads:/app/uploads
     ports:
-    - 5000:5000
+      - "5000:5000"
+    networks:
+      - exam-autograder-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   web:
     build:
-      context: ExamGraderUi/
+      context: ./ExamGraderUi/
       dockerfile: Dockerfile
-    image: exam-autograder-ui
-    container_name: web
-    restart: always
+    container_name: exam-autograder-ui
+    restart: unless-stopped
+    depends_on:
+      springboot:
+        condition: service_healthy
+    environment:
+      - API_URL=http://localhost:9090
     volumes:
-      - $PWD/uploads/:/usr/src/app
+      - ./uploads:/app/uploads
     ports:
-    - 35728:35728
-    - 8100:8100
+      - "80:80"
+    networks:
+      - exam-autograder-network
 
 volumes:
-     static-content:
+  mongo_data:
+  uploads:
 
 networks:
-  default:
-    external:
-      name: exam-autograder-network
+  exam-autograder-network:
+    driver: bridge
