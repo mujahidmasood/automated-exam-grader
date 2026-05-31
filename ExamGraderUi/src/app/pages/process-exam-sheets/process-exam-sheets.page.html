@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar color="secondary" class="ion-text-center">
+    <ion-row>
+      <ion-col>
+        <img alt="logo" height="40px" src="assets/imgs/logo.png" />
+      </ion-col>
+      <ion-col>
+        <ion-label>{{ 'schedule_grading_title' | translate }}</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-buttons slot="end">
+      <ion-button (click)="processExamSheets(processExamForm.value)">
+        <ion-icon slot="icon-only" name="cloud"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="processExamForm">
+    <ion-list>
+      <ion-radio-group formControlName="language" (ionChange)="changeLanguage($event)">
+        <ion-row class="ion-padding-horizontal">
+          <ion-col>
+            <ion-radio value="de">{{ 'de' | translate }}</ion-radio>
+          </ion-col>
+          <ion-col>
+            <ion-radio value="en">{{ 'en' | translate }}</ion-radio>
+          </ion-col>
+        </ion-row>
+      </ion-radio-group>
+
+      <ion-item>
+        <ion-select label="{{ 'exam_to_process' | translate }}"
+          formControlName="inputExamSheetsDirectory">
+          <ion-select-option
+            [value]="unProcessedExam.course + getTranslatedValue(unProcessedExam.semester) + unProcessedExam.year"
+            *ngFor="let unProcessedExam of unProcessedExams"
+          >
+            {{ unProcessedExam.course + ' - ' +
+            getTranslatedValue(unProcessedExam.semester) + ' ' +
+            unProcessedExam.year }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">{{ 'processing_date' | translate }}</ion-label>
+        <ion-datetime presentation="date" formControlName="processingDate"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-select label="{{ 'grading_criteria' | translate }}" interface="popover"
+          formControlName="gradingMode">
+          <ion-select-option value="full">{{ 'full' | translate }}</ion-select-option>
+          <ion-select-option value="partial">{{ 'partial' | translate }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="progress">
+        <div
+          class="progress-bar progress-bar-info"
+          role="progressbar"
+          [ngStyle]="{ width: progress.percentage + '%' }"
+        >
+          {{ progress.percentage }}%
+        </div>
+      </div>
+
+      <ion-item>
+        <input type="file" (change)="selectFile($event)" multiple
+          accept=".png, .jpg, .jpeg, .pdf" />
+      </ion-item>
+
+      <ion-buttons>
+        <ion-button [disabled]="!selectedFiles" (click)="upload(processExamForm.value)">
+          {{ 'upload' | translate }}
+        </ion-button>
+        <ion-button
+          [disabled]="!processExamForm.value.inputExamSheetsDirectory"
+          *ngIf="showFile"
+          (click)="showFiles(false, processExamForm.value)"
+        >
+          {{ 'hide_files' | translate }}
+        </ion-button>
+        <ion-button
+          [disabled]="!processExamForm.value.inputExamSheetsDirectory"
+          *ngIf="!showFile"
+          (click)="showFiles(true, processExamForm.value)"
+        >
+          {{ 'show_files' | translate }}
+        </ion-button>
+      </ion-buttons>
+
+      <ion-list *ngFor="let file of fileUploads | async" [hidden]="!showFile">
+        <ion-item>
+          {{ file }}
+          <ion-buttons slot="end">
+            <ion-button (click)="getUploadedImage(file, processExamForm.value)">
+              <ion-icon slot="icon-only" name="eye"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteStudentExamSheet(processExamForm.value, file)">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+        <img [src]="uploadedImage" *ngIf="uploadedImage" />
+      </ion-list>
+    </ion-list>
+  </form>
+</ion-content>
