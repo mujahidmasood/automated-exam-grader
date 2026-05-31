@@ -1,7 +1,7 @@
 
 #Before running this docker file please make sure to run mvn clean install
 
-FROM eclipse-temurin:11-jre
+FROM eclipse-temurin:11.0.31_11-jre
 
 #FROM maven:3.6.0-jdk-11-slim AS build
 #COPY src /home/app/src
