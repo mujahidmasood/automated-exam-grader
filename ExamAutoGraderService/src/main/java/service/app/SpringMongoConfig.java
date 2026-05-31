@@ -1,23 +1,21 @@
 package service.app;
 
-import com.mongodb.Mongo;
-import com.mongodb.MongoClient;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
-import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
+import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
 /**
- * Contains configs used by spring boot
+ * Contains the MongoDB configuration used by spring boot.
+ *
+ * Migrated from the removed {@code AbstractMongoConfiguration} /
+ * {@code com.mongodb.MongoClient} APIs to the
+ * {@code AbstractMongoClientConfiguration} / {@code com.mongodb.client.MongoClient}
+ * APIs introduced with Spring Data MongoDB 3.x (Spring Boot 2.7).
  */
 @Configuration
-public class SpringMongoConfig extends AbstractMongoConfiguration {
-    @Value("${spring.profiles.active}")
-    private String profileActive;
-
-    @Value("${spring.application.name}")
-    private String proAppName;
+public class SpringMongoConfig extends AbstractMongoClientConfiguration {
 
     @Value("${spring.data.mongodb.host}")
     private String mongoHost;
@@ -28,25 +26,6 @@ public class SpringMongoConfig extends AbstractMongoConfiguration {
     @Value("${spring.data.mongodb.database}")
     private String mongoDB;
 
-    @Value("${spring.data.mongodb.username}")
-    private String  userName;
-
-    @Value("${spring.data.mongodb.password}")
-    private String  password;
-
-    @Value("${server.port}")
-    private String serverPort;
-
-    @Override
-    public MongoMappingContext mongoMappingContext()
-            throws ClassNotFoundException {
-        return super.mongoMappingContext();
-    }
-
-    @Bean
-    public Mongo mongo() throws Exception {
-        return new MongoClient(mongoHost + ":" + mongoPort);
-    }
     @Override
     protected String getDatabaseName() {
         return mongoDB;
@@ -54,6 +33,6 @@ public class SpringMongoConfig extends AbstractMongoConfiguration {
 
     @Override
     public MongoClient mongoClient() {
-        return null;
+        return MongoClients.create("mongodb://" + mongoHost + ":" + mongoPort);
     }
 }

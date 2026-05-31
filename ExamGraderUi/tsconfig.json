@@ -1,32 +1,32 @@
 {
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "declaration": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": [
-      "dom",
-      "es2015"
-    ],
-    "module": "es2015",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "target": "es5",
-    "rootDir": "src/"
-  },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/**/*.spec.ts",
-    "src/**/__tests__/*.ts"
-  ],
-  "typeRoots": [
-    "node_modules/@types"
-  ],
   "compileOnSave": false,
-  "atom": {
-    "rewriteTsconfig": false
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": false,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "lib": ["ES2022", "dom"]
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": false
   }
 }

@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar class="ion-text-center">
+    <ion-title>{{ 'crop_exam_title' | translate }}</ion-title>
+    <ion-buttons slot="start" *ngIf="examSheet">
+      <ion-button (click)="helpMenu()">
+        <ion-icon slot="icon-only" name="help"></ion-icon>
+      </ion-button>
+      <ion-button color="danger" (click)="reset()">Reset</ion-button>
+      <ion-button color="danger" (click)="clear()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+      <ion-button color="secondary" (click)="save()">
+        <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div>
+    <h3>
+      Select exam sheet image to crop answer coordinates and matriculation
+      coordinates.
+    </h3>
+    <input type="file" accept="image/*" (change)="previewImage($event)" />
+  </div>
+
+  <div class="cropper-container" *ngIf="examSheet">
+    <img #cropperImage [src]="examSheet" />
+  </div>
+
+  <img
+    *ngIf="croppedImage"
+    [src]="croppedImage"
+    alt="cropped"
+    style="max-width: 100%; margin-top: 12px;"
+  />
+</ion-content>

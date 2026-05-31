@@ -1,0 +1,13 @@
+:host {
+  table.grade-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table.grade-table th,
+  table.grade-table td {
+    border: 1px solid #e9ebec;
+    color: #606c71;
+    padding: 6px 8px;
+    font-size: 14px;
+  }
+}

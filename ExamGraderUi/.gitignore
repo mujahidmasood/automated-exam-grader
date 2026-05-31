@@ -1,6 +1,21 @@
-/.sourcemaps/
+# Dependencies
 /node_modules/
+
+# Build output
+/www/
+/dist/
+/out-tsc/
+/.angular/
+/.sourcemaps/
+
+# Cordova / mobile
 /platforms/
 /plugins/
-/www/
+
+# IDE
 .idea
+.vscode/
+
+# Logs
+npm-debug.log*
+*.log
