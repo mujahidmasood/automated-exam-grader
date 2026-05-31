@@ -7,7 +7,6 @@ import cv2
 from pathlib import Path
 
 from google.cloud import vision
-from google.cloud.vision import types
 import io
 import time
 import imageio
@@ -58,7 +57,7 @@ class AutoGrader:
             client = vision.ImageAnnotatorClient()
             with io.open(temp_url, 'rb') as image_file:
                 content = image_file.read()
-                image = types.Image(content=content)
+                image = vision.Image(content=content)
                 res = client.text_detection(image=image)
                 texts = res.text_annotations
 

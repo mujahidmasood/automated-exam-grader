@@ -1,0 +1,16 @@
+# Runtime dependencies for the Exam Auto Grader processor (Flask + Google Cloud Vision).
+# Pinned to maintained releases that work on Python 3.11+.
+#
+# Note: the legacy TensorFlow/Keras CNN path (src/tfhelpers.py, used by
+# helpers.py and test_autoGrader.py) is not part of the live Flask service and
+# its module is not present in this repository, so those heavy ML libraries are
+# intentionally not listed here.
+
+Flask==3.0.3
+google-cloud-vision==3.7.4
+opencv-python-headless==4.10.0.84
+numpy==1.26.4
+imageio==2.34.2
+Pillow==10.4.0
+matplotlib==3.9.2
+openpyxl==3.1.5

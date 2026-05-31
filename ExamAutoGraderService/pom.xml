@@ -11,7 +11,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.1.RELEASE</version>
+        <version>2.7.18</version>
     </parent>
 
     <dependencies>
@@ -30,10 +30,13 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!-- ========= Spring Data ========= -->
+        <!-- ========= Spring Data =========
+             Use the Spring Boot starter so the synchronous MongoDB driver
+             (mongodb-driver-sync, providing com.mongodb.client.*) is on the
+             classpath alongside spring-data-mongodb. -->
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-mongodb</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
 
         <!-- ========= Testing ======== -->
@@ -49,6 +52,15 @@
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
 
+        <!-- ========= Bean Validation =========
+             Since Spring Boot 2.3 the validation starter is no longer pulled in
+             transitively by spring-boot-starter-web, but the code uses
+             javax.validation.constraints.NotNull, so add it explicitly. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
         <!-- ========= PDF Box ======== -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
@@ -56,25 +68,19 @@
             <version>2.0.30</version>
         </dependency>
 
-        <!-- ========= Font Box ======== -->
+        <!-- ========= Font Box ========
+             Kept aligned with the pdfbox version above. -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>fontbox</artifactId>
-            <version>2.0.13</version>
-        </dependency>
-
-        <!-- ========= Commons Logging ======== -->
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
+            <version>2.0.30</version>
         </dependency>
 
         <!-- ========= Commons IO for FileUtils ======== -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.7</version>
+            <version>2.16.1</version>
         </dependency>
 
 
@@ -106,16 +112,15 @@
             <version>2.4.9-4</version>
         </dependency>-->
 
+        <!-- Versions managed by the Spring Boot BOM to stay in sync with the framework. -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>5.0.5.RELEASE</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.8.12</version>
             <scope>compile</scope>
         </dependency>
 
@@ -123,11 +128,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
-
-        <querydsl.version>3.6.0</querydsl.version>
-        <guava.version>18.0</guava.version>
-
+        <java.version>11</java.version>
     </properties>
 
     <build>
@@ -136,15 +137,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-
         </plugins>
         <finalName>exam-autograder-service</finalName>
     </build>
