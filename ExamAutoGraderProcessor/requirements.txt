@@ -6,7 +6,7 @@
 # its module is not present in this repository, so those heavy ML libraries are
 # intentionally not listed here.
 
-Flask==3.0.3
+Flask==3.1.3
 google-cloud-vision==3.7.4
 opencv-python-headless==4.10.0.84
 numpy==1.26.4
